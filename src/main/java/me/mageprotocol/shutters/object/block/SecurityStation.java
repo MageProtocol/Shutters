@@ -24,7 +24,7 @@ public class SecurityStation extends MPBlock implements ITileEntityProvider
     public SecurityStation()
     {
         GameRegistry.registerBlock(this, name);
-        setUnlocalizedName("MPS:" + name);
+        setUnlocalizedName("MPS:securityStation");
     }
 
     public String getName()

@@ -1,5 +1,7 @@
 package me.mageprotocol.shutters.proxy;
 
+import me.mageprotocol.shutters.object.block.tileentity.TileEntityRenderShutter;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;

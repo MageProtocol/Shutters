@@ -1,0 +1,7 @@
+{
+	"variants": {
+		"normal": { "model": "shutters:renderShutter" },
+		"type=0": { "model": "shutters:renderShutter", "y": 0 },
+		"type=1": {"model": "shutters:renderShutter", "y": 90}
+	}
+}

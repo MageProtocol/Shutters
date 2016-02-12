@@ -1,0 +1,8 @@
+{
+  "variants": {
+
+    "normal": { "model": "shutters:shutterRoller" },
+    "rotation=0": { "model": "shutters:shutterRoller", "y": 0 },
+    "rotation=1": {"model": "shutters:shutterRoller", "y": 90}
+  }
+}
