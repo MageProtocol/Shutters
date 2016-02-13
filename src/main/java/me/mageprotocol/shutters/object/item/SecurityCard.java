@@ -1,23 +1,21 @@
 package me.mageprotocol.shutters.object.item;
 
-import me.mageprotocol.shutters.Shutters;
 import me.mageprotocol.shutters.object.MPItem;
+
+import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import java.util.List;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /**
  * Created by Zac on 05/02/2016.
  */
 public class SecurityCard extends MPItem
 {
-
-
     private final String name = "securityCard";
 
     public SecurityCard()
@@ -32,8 +30,8 @@ public class SecurityCard extends MPItem
     }
 
     @Override
-    public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn) {
-
+    public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn)
+    {
         if(itemStackIn.getTagCompound() == null)
         {
 
@@ -47,8 +45,8 @@ public class SecurityCard extends MPItem
     }
 
     @Override
-    public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
-
+    public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)
+    {
         if(stack.getTagCompound() != null)
         {
             tooltip.add("Keycard Owner: " + stack.getTagCompound().getString("keyOwner"));
