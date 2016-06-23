@@ -16,6 +16,6 @@ public class ShuttersCreativeTab extends CreativeTabs {
 
     @Override
     public Item getTabIconItem() {
-        return Items.apple;
+        return Items.APPLE;
     }
 }

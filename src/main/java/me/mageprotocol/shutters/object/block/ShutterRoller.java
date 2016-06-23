@@ -8,16 +8,19 @@ import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+
+import javax.annotation.Nullable;
 
 /**
  * Created by Zac on 12/02/2016.
@@ -28,9 +31,9 @@ public class ShutterRoller extends MPBlock implements ITileEntityProvider
     public static final PropertyInteger TYPE = PropertyInteger.create("rotation", 0, 1);
 
     @Override
-    protected BlockState createBlockState()
+    protected BlockStateContainer createBlockState()
     {
-        return new BlockState(this, new IProperty[] {TYPE});
+        return new BlockStateContainer(this, new IProperty[] {TYPE});
     }
 
     private final String name = "shutterRoller";
@@ -38,8 +41,8 @@ public class ShutterRoller extends MPBlock implements ITileEntityProvider
 
     public ShutterRoller()
     {
-        GameRegistry.registerBlock(this, name);
         this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE, 0));
+        setRegistryName(name);
         setUnlocalizedName(name);
     }
 
@@ -94,20 +97,16 @@ public class ShutterRoller extends MPBlock implements ITileEntityProvider
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ) {
-
-        if(!worldIn.isRemote) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
+        if (!worldIn.isRemote) {
             if (!isActive) {
-                isActive = !isActive;
+                isActive = true;
                 placeShutters(worldIn, pos, playerIn, state);
-                System.out.println("State: Active");
             } else {
-                isActive = !isActive;
+                isActive = false;
                 removeShutters(worldIn, pos, playerIn);
-                System.out.println("State: Inactive");
             }
         }
-
         return false;
     }
 
@@ -118,7 +117,7 @@ public class ShutterRoller extends MPBlock implements ITileEntityProvider
             BlockPos position = new BlockPos(pos.getX(), pos.getY() - i, pos.getZ());
             IBlockState blockState = render.getDefaultState();
 
-            if (worldIn.getBlockState(position).getBlock().isAir(worldIn, position)) {
+            if (worldIn.getBlockState(position).getBlock().isAir(state, worldIn, position)) {
                 worldIn.setBlockState(position, blockState);
                 RenderShutter renderShutter = (RenderShutter) worldIn.getBlockState(position).getBlock();
 

@@ -3,15 +3,20 @@ package me.mageprotocol.shutters.object.block;
 import me.mageprotocol.shutters.Shutters;
 import me.mageprotocol.shutters.object.MPBlock;
 import me.mageprotocol.shutters.object.block.tileentity.TileEntitySecurityStation;
+
+import net.minecraftforge.fml.common.registry.GameRegistry;
+
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+
+import javax.annotation.Nullable;
 
 /**
  * Created by Zac on 05/02/2016.
@@ -23,8 +28,8 @@ public class SecurityStation extends MPBlock implements ITileEntityProvider
 
     public SecurityStation()
     {
-        GameRegistry.registerBlock(this, name);
-        setUnlocalizedName("MPS:securityStation");
+        setUnlocalizedName("securityStation");
+        setRegistryName("securityStation");
     }
 
     public String getName()
@@ -39,14 +44,10 @@ public class SecurityStation extends MPBlock implements ITileEntityProvider
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ)
-    {
-        if(!world.isRemote)
-        {
-            player.openGui(Shutters.instance, 1, world, (int)hitX, (int)hitY, (int)hitZ);
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
+        if (!worldIn.isRemote) {
+            playerIn.openGui(Shutters.instance, 1, worldIn, (int) hitX, (int) hitY, (int) hitZ);
         }
         return false;
     }
-
-
 }

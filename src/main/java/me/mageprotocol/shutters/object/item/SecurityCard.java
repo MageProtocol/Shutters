@@ -7,6 +7,10 @@ import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -20,8 +24,7 @@ public class SecurityCard extends MPItem
 
     public SecurityCard()
     {
-        GameRegistry.registerItem(this, name);
-        setUnlocalizedName("MPS:securityCard");
+        setUnlocalizedName("securityCard");
     }
 
     public String getName()
@@ -30,18 +33,13 @@ public class SecurityCard extends MPItem
     }
 
     @Override
-    public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn)
-    {
-        if(itemStackIn.getTagCompound() == null)
-        {
-
-            itemStackIn.setTagCompound(new NBTTagCompound());
-            itemStackIn.getTagCompound().setString("keyOwner", playerIn.getName());
-            itemStackIn.getTagCompound().setString("keycardKey", generateRandomKey());
-
+    public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (stack.getTagCompound() == null) {
+            stack.setTagCompound(new NBTTagCompound());
+            stack.getTagCompound().setString("keyOwner", playerIn.getDisplayNameString());
+            stack.getTagCompound().setString("keycoardKey", generateRandomKey());
         }
-
-        return itemStackIn;
+        return EnumActionResult.FAIL;
     }
 
     @Override

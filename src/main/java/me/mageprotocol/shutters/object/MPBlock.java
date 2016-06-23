@@ -12,7 +12,7 @@ public class MPBlock extends Block
 
     public MPBlock()
     {
-        super(Material.rock);
+        super(Material.ROCK);
         setCreativeTab(ModObjects.shuttersTab);
     }
 }

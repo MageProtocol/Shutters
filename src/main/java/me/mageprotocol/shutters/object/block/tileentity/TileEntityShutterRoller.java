@@ -10,9 +10,10 @@ public class TileEntityShutterRoller extends TileEntity
 {
 
     @Override
-    public void writeToNBT(NBTTagCompound compound)
+    public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
         super.writeToNBT(compound);
+        return compound;
     }
 
     @Override
